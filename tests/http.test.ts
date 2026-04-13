@@ -9,7 +9,7 @@ global.fetch = mockFetch;
 const mockConfig: ResolvedCordiaConfig = {
   apiKey: 'test-key',
   botId: 'test-bot',
-  baseUrl: 'http://localhost:5000/api/v1',
+  baseUrl: 'https://cordlane-brain.onrender.com/api/v1',
   heartbeatInterval: 30000,
   autoHeartbeat: false,
   debug: false,
@@ -38,7 +38,7 @@ describe('HttpTransport', () => {
     await http.post('/test', { data: 'value' });
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'http://localhost:5000/api/v1/test',
+      'https://cordlane-brain.onrender.com/api/v1/test',
       expect.objectContaining({
         method: 'POST',
         headers: expect.objectContaining({

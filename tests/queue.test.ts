@@ -10,7 +10,7 @@ global.fetch = mockFetch;
 const mockConfig: ResolvedCordiaConfig = {
   apiKey: 'test-key',
   botId: 'test-bot',
-  baseUrl: 'http://localhost:5000/api/v1',
+  baseUrl: 'https://cordlane-brain.onrender.com/api/v1',
   heartbeatInterval: 30000,
   autoHeartbeat: false,
   debug: false,
@@ -81,8 +81,8 @@ describe('EventQueue', () => {
 
     // Verify the endpoints were called correctly
     const urls = mockFetch.mock.calls.map((call) => call[0] as string);
-    expect(urls).toContain('http://localhost:5000/api/v1/track-command');
-    expect(urls).toContain('http://localhost:5000/api/v1/track-user');
+    expect(urls).toContain('https://cordlane-brain.onrender.com/api/v1/track-command');
+    expect(urls).toContain('https://cordlane-brain.onrender.com/api/v1/track-user');
   });
 
   it('should not enqueue after destroy', async () => {

@@ -1,7 +1,7 @@
 import type { CordiaConfig, ResolvedCordiaConfig } from '../types';
 
 /** Default API base URL — can be overridden via env or config */
-const DEFAULT_BASE_URL = 'https://api.cordia.dev/api/v1';
+const DEFAULT_BASE_URL = 'https://api.cordialane.com/api/v1';
 
 /** Default heartbeat interval: 30 seconds */
 const DEFAULT_HEARTBEAT_INTERVAL = 30_000;

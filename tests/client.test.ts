@@ -9,7 +9,7 @@ global.fetch = mockFetch;
 const validConfig: CordiaConfig = {
   apiKey: 'test-api-key-123',
   botId: 'test-bot-id-456',
-  baseUrl: 'http://localhost:5000/api/v1',
+  baseUrl: 'https://cordlane-brain.onrender.com/api/v1',
   autoHeartbeat: false, // Disable for testing
   debug: false,
 };
@@ -118,7 +118,7 @@ describe('CordiaClient', () => {
       await client.postGuildCount(150);
 
       expect(mockFetch).toHaveBeenCalledWith(
-        'http://localhost:5000/api/v1/guild-count',
+        'https://cordlane-brain.onrender.com/api/v1/guild-count',
         expect.objectContaining({
           method: 'POST',
           headers: expect.objectContaining({

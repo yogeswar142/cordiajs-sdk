@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 // Cordia SDK — Official analytics SDK for Discord bots
-// https://docs.cordia.dev
+// https://docs.cordialane.com
 // ─────────────────────────────────────────────────────────────
 
 export { CordiaClient } from './client';

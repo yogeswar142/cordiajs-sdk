@@ -19,7 +19,7 @@ export interface CordiaConfig {
 
   /**
    * Base URL of the Cordia API.
-   * @default Uses CORDIA_API_URL env var, or 'https://api.cordia.dev/api/v1'
+   * @default Uses CORDIA_API_URL env var, or 'https://api.cordialane.com/api/v1'
    */
   baseUrl?: string;
 

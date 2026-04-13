@@ -10,7 +10,7 @@ Track commands, users, server count, and uptime — all in one package.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)](https://www.typescriptlang.org/)
 
-[Documentation](https://docs.cordia.dev) · [GitHub](https://github.com/yogeswar142/cordia) · [Report Bug](https://github.com/yogeswar142/cordia/issues)
+[Documentation](https://docs.cordialane.com) · [GitHub](https://github.com/yogeswar142/cordia) · [Report Bug](https://github.com/yogeswar142/cordia/issues)
 
 </div>
 
@@ -104,7 +104,7 @@ client.login(process.env.DISCORD_TOKEN);
 |--------|------|---------|-------------|
 | `apiKey` | `string` | **required** | Your bot's API key from the Cordia dashboard |
 | `botId` | `string` | **required** | Your bot's unique ID |
-| `baseUrl` | `string` | `https://api.cordia.dev/api/v1` | API base URL (or set `CORDIA_API_URL` env var) |
+| `baseUrl` | `string` | `https://api.cordialane.com/api/v1` | API base URL (or set `CORDIA_API_URL` env var) |
 | `heartbeatInterval` | `number` | `30000` | Heartbeat interval in ms |
 | `autoHeartbeat` | `boolean` | `true` | Auto-start heartbeat on init |
 | `debug` | `boolean` | `false` | Enable debug console logging |
@@ -123,12 +123,12 @@ client.login(process.env.DISCORD_TOKEN);
 
 **Development:**
 ```env
-CORDIA_API_URL=http://localhost:5000/api/v1
+CORDIA_API_URL=https://cordlane-brain.onrender.com/api/v1
 ```
 
 **Production:**
 ```env
-CORDIA_API_URL=https://api.cordia.dev/api/v1
+CORDIA_API_URL=https://api.cordialane.com/api/v1
 ```
 
 ## 📖 API Reference
@@ -178,7 +178,7 @@ await cordia.destroy();
 
 ## 📚 Full Documentation
 
-Visit **[docs.cordia.dev](https://docs.cordia.dev)** for complete documentation, guides, and API reference.
+Visit **[docs.cordialane.com](https://docs.cordialane.com)** for complete documentation, guides, and API reference.
 
 ## 📄 License
 
