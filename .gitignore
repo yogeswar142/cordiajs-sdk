@@ -4,3 +4,6 @@ dist/
 .env
 .env.local
 coverage/
+
+# Git AI script
+git-ai.sh

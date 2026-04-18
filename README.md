@@ -1,46 +1,19 @@
-<div align="center">
+# Cordia
 
-# 📊 Cordia
+The official JavaScript/TypeScript analytics SDK for Discord bots.
 
-**The official analytics SDK for Discord bots**
+Track commands, users, server count, and uptime with minimal setup. Events are batched and sent automatically. The heartbeat system monitors uptime out of the box.
 
-Track commands, users, server count, and uptime — all in one package.
+[![npm](https://img.shields.io/npm/v/cordia)](https://www.npmjs.com/package/cordia)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-[![npm version](https://img.shields.io/npm/v/cordia.svg?style=flat-square)](https://www.npmjs.com/package/cordia)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)](https://www.typescriptlang.org/)
-
-[Documentation](https://docs.cordialane.com) · [GitHub](https://github.com/yogeswar142/cordia) · [Report Bug](https://github.com/yogeswar142/cordia/issues)
-
-</div>
-
----
-
-## ✨ Features
-
-- 📡 **Auto Heartbeat** — Automatic uptime monitoring every 30 seconds
-- ⚡ **Event Batching** — Commands & user events are batched for optimal performance
-- 🔄 **Retry Logic** — Exponential backoff with jitter on failed requests
-- 🛡️ **Graceful Errors** — Never crashes your bot, even if the API is down
-- 📦 **Tiny Footprint** — Zero dependencies, uses native `fetch`
-- 🔷 **TypeScript First** — Full type definitions included
-- 🎯 **ESM + CJS** — Works with both import and require
-
-## 📦 Installation
+## Install
 
 ```bash
 npm install cordia
 ```
 
-```bash
-yarn add cordia
-```
-
-```bash
-pnpm add cordia
-```
-
-## 🚀 Quick Start
+## Quick Start
 
 ```typescript
 import { CordiaClient } from 'cordia';
@@ -51,18 +24,15 @@ const cordia = new CordiaClient({
 });
 
 // Track a command
-cordia.trackCommand({
-  command: 'play',
-  userId: '123456789',
-});
+cordia.trackCommand({ command: 'play', userId: '123456789' });
 
 // Report server count
 await cordia.postGuildCount(150);
 
-// Heartbeat starts automatically! ❤️
+// Heartbeat runs automatically
 ```
 
-## 🤖 Discord.js Integration
+## Discord.js Example
 
 ```typescript
 import { Client, GatewayIntentBits } from 'discord.js';
@@ -88,7 +58,6 @@ client.on('interactionCreate', (interaction) => {
   });
 });
 
-// Graceful shutdown
 process.on('SIGINT', async () => {
   await cordia.destroy();
   client.destroy();
@@ -98,88 +67,38 @@ process.on('SIGINT', async () => {
 client.login(process.env.DISCORD_TOKEN);
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `apiKey` | `string` | **required** | Your bot's API key from the Cordia dashboard |
-| `botId` | `string` | **required** | Your bot's unique ID |
-| `baseUrl` | `string` | `https://api.cordialane.com/api/v1` | API base URL (or set `CORDIA_API_URL` env var) |
-| `heartbeatInterval` | `number` | `30000` | Heartbeat interval in ms |
-| `autoHeartbeat` | `boolean` | `true` | Auto-start heartbeat on init |
-| `debug` | `boolean` | `false` | Enable debug console logging |
-| `batchSize` | `number` | `10` | Max events before auto-flush |
-| `flushInterval` | `number` | `5000` | Auto-flush interval in ms |
-| `maxRetries` | `number` | `3` | Max retry attempts |
-| `timeout` | `number` | `10000` | Request timeout in ms |
+| `apiKey` | `string` | required | API key from the Cordia dashboard |
+| `botId` | `string` | required | Your bot's unique ID |
+| `baseUrl` | `string` | `https://api.cordialane.com/api/v1` | API endpoint |
+| `heartbeatInterval` | `number` | `30000` | Heartbeat interval (ms) |
+| `autoHeartbeat` | `boolean` | `true` | Start heartbeat on init |
+| `batchSize` | `number` | `10` | Events before auto-flush |
+| `flushInterval` | `number` | `5000` | Auto-flush interval (ms) |
+| `maxRetries` | `number` | `3` | Retry attempts on failure |
+| `timeout` | `number` | `10000` | Request timeout (ms) |
+| `debug` | `boolean` | `false` | Enable debug logging |
 
-## 🌐 Environment Variables
+## API
 
-| Variable | Description |
-|----------|-------------|
-| `CORDIA_API_URL` | Override the default API base URL |
-| `CORDIA_API_KEY` | Your bot's API key |
-| `CORDIA_BOT_ID` | Your bot's unique ID |
+| Method | Description |
+|--------|-------------|
+| `trackCommand(payload)` | Queue a command event (batched) |
+| `trackUser(payload)` | Queue a user activity event (batched) |
+| `postGuildCount(count)` | Report server count (immediate) |
+| `startHeartbeat()` | Start heartbeat manually |
+| `stopHeartbeat()` | Stop heartbeat |
+| `getUptime()` | Returns uptime in ms |
+| `flush()` | Force-flush queued events |
+| `destroy()` | Stop heartbeat, flush, and clean up |
 
-**Development:**
-```env
-CORDIA_API_URL=https://cordlane-brain.onrender.com/api/v1
-```
+## Documentation
 
-**Production:**
-```env
-CORDIA_API_URL=https://api.cordialane.com/api/v1
-```
+Full guides and API reference at [docs.cordialane.com](https://docs.cordialane.com).
 
-## 📖 API Reference
+## License
 
-### `trackCommand(payload)`
-Track a command execution. Events are batched.
-
-```typescript
-cordia.trackCommand({
-  command: 'ban',
-  userId: '123',
-  guildId: '456',
-  metadata: { reason: 'spam' },
-});
-```
-
-### `trackUser(payload)`
-Track an active user. Events are batched.
-
-```typescript
-cordia.trackUser({
-  userId: '123',
-  guildId: '456',
-  action: 'message',
-});
-```
-
-### `postGuildCount(count)`
-Report server count. Sent immediately.
-
-```typescript
-await cordia.postGuildCount(client.guilds.cache.size);
-```
-
-### `startHeartbeat()` / `stopHeartbeat()`
-Manually control the heartbeat system.
-
-### `flush()`
-Force-flush all queued events.
-
-### `destroy()`
-Gracefully shut down — stops heartbeat and flushes remaining events.
-
-```typescript
-await cordia.destroy();
-```
-
-## 📚 Full Documentation
-
-Visit **[docs.cordialane.com](https://docs.cordialane.com)** for complete documentation, guides, and API reference.
-
-## 📄 License
-
-MIT © [Yogeswar](https://github.com/yogeswar142)
+MIT
